@@ -1,10 +1,7 @@
 name: stable
 
 on:
-  push:
-    tags:
-      - "*"
-  workflow_dispatch: {}
+  workflow_dispatch
 
 jobs:
   build:
@@ -17,9 +14,13 @@ jobs:
       options: --privileged
 
     steps:
-    - name: Clone build scripts
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-    - name: Build and upload stable .iso
-      run: |
-        ./workflows.sh etc/terraform-stable-azure.conf "${{ secrets.key }}" "${{ secrets.secret }}" "${{ secrets.endpoint }}" "${{ secrets.bucket }}"
+    - name: Build ISO
+      run: ./build.sh etc/terraform.conf
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: HornbillOS 22.10
+        path: builds/
+    
