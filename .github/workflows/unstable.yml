@@ -15,6 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Install needed packages
+      run: apt update
 
     - name: Build ISO
       run: ./build.sh etc/terraform.conf
