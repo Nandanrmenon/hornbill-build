@@ -17,16 +17,16 @@ echo "P: Begin executing remove-blacklisted-packages chroot hook..."
 
 #apt-get autoremove --purge -f -q -y bzr
 
-apt-get autoremove --purge -f -q -y \
-    ubuntu-desktop \
-    ubuntu-session \
-    apport \
-    snapd \
-    update-manager \
-    update-notifier \
-    gparted
+# apt-get autoremove --purge -f -q -y \
+#     ubuntu-desktop \
+#     ubuntu-session \
+#     apport \
+#     snapd \
+#     update-manager \
+#     update-notifier \
+#     gparted
 
-rm -R ../ubuntu-seeds ../platform
+# rm -R ../ubuntu-seeds ../platform
 
 # fake desktop entries to prevent some applications from displaying
 mkdir -p /etc/skel/.local/share/applications
