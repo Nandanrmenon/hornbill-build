@@ -6,24 +6,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
     container:
       image: debian:latest
       volumes:
         - /proc:/proc
-      options: --privileged
+      options: --privileged -it
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Install needed packages
-      run: apt update
+      run: apt update && apt install debootstrap -y
 
     - name: Build ISO
       run: ./build.sh etc/terraform.conf
 
     - uses: actions/upload-artifact@v2
       with:
-        name: HornbillOS 22.10
+        name: VanillaOS 22.10
         path: builds/
-    

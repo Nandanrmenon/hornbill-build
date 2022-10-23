@@ -1,67 +1,39 @@
-<div align="center">
-  <a href="https://elementary.io" align="center">
-    <center align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elementary/brand/master/logomark-white.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/elementary/brand/master/logomark-black.png">
-  <img src="https://raw.githubusercontent.com/elementary/brand/master/logomark-black.png" alt="elementary" align="center" height="200">
-</picture>
-    </center>
-  </a>
-  <br>
-  <h1 align="center"><center>elementary OS</center></h1>
-  <h3 align="center"><center>Build scripts for image creation</center></h3>
-  <br>
-  <br>
-</div>
+## This ISO Builder
 
-<p align="center">
-  <img src="https://github.com/elementary/os/workflows/stable/badge.svg" alt="Stable">
-  <img src="https://github.com/elementary/os/actions/workflows/daily-7.0.yml/badge.svg" alt="Daily 7.0">
-  <img src="https://github.com/elementary/os/actions/workflows/daily-6.1-arm.yml/badge.svg" alt="Daily 7.0">
-  
-</p>
+This ISO builder was basically a combination of previous efforts from Ubuntu
+Budgie (budgie-remix at the time), some stuff from livecd-rootfs from launchpad
+and Elementary OS, thanks to the amazing devs from all around!
+Elem Link: https://github.com/elementary/os
 
----
+## Why not just fork from livecd-rootfs?
+
+The Ubuntu ISO's are built with ubuntu-cdimage scripts and with livecd-rootfs,
+but it has a lot of extra scripts that are hard to navigate all at once unless
+you have previous experience and is a bottomless well of asterisks attached to it.
+It's better to get something not perfect, but close enough.
 
 ## Building Locally
 
-As elementary OS is built with the Debian version of `live-build`, not the Ubuntu patched version, it's easiest to build an elementary .iso in a Debian VM or container. This prevents messing up your host system too.
+As UCR is built with the Debian version of `live-build`, not the Ubuntu patched version, it's easiest to build an iso in a Debian VM or container. This prevents messing up your host system too.
 
-The following examples assume you have Docker correctly installed and set up, and that your current working directory is this repo. When done, your image will be in the `builds` folder.
+The following example uses Docker and assumes you have Docker correctly installed and set up:
 
-### 64-bit AMD/Intel
+ 1) Clone this project & `cd` into it:
 
-Configure the channel in the `etc/terraform.conf` (stable, daily), then run:
+    ```
+    git clone https://github.com/Ubuntu-Cinnamon-Remix/iso-builder && cd iso-builder
+    ```
 
-```sh
-docker run --privileged -i -v /proc:/proc \
-    -v ${PWD}:/working_dir \
-    -w /working_dir \
-    debian:latest \
-    /bin/bash -s etc/terraform.conf < build.sh
-```
+ 2) Configure the channel in the `etc/terraform.conf` (unstable, all).
 
-### Raspberry Pi 4
+ 3) Run the build:
 
-```sh
-docker run --privileged -i -v /proc:/proc \
-    -v ${PWD}:/working_dir \
-    -w /working_dir \
-    debian:unstable \
-    ./build-rpi.sh
-```
+    ```
+    docker run --privileged -i -v /proc:/proc \
+        -v ${PWD}:/working_dir \
+        -w /working_dir \
+        debian:latest \
+        /bin/bash -s etc/terraform.conf < build.sh
+    ```
 
-### Pinebook Pro
-
-```sh
-docker run --privileged -i -v /proc:/proc \
-    -v ${PWD}:/working_dir \
-    -w /working_dir \
-    debian:unstable \
-    ./build-pinebookpro.sh
-```
-
-## Further Information
-
-More information about the concepts behind `live-build` and the technical decisions made to arrive at this set of tools to build an .iso can be found [on the wiki](https://github.com/elementary/os/wiki/Building-iso-Images).
+ 4) When done, your image will be in the `builds` folder.

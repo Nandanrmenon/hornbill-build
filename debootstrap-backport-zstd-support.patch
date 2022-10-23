@@ -16,4 +16,3 @@
  		data.tar)     cat_cmd=cat ;;
  		*) error 1 UNKNOWNDATACOMP "Unknown compression type for %s in %s" "$tarball" "$pkg" ;;
  	esac
-
