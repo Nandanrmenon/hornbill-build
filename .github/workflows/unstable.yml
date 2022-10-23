@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install needed packages
-      run: apt update && apt install debootstrap -y
+      run: echo 'DPkg::options { "--force-confdef"; };' >> /etc/apt/apt.conf && apt update && apt-get upgrade -y && apt install debootstrap -y
 
     - name: Build ISO
       run: ./build.sh etc/terraform.conf
