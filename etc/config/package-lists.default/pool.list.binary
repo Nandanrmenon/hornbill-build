@@ -9,10 +9,8 @@ user-setup
 efibootmgr
 secureboot-db
 
-#if ARCHITECTURES amd64
 grub-efi-amd64
 grub-efi-amd64-bin
 grub-efi-amd64-signed
 shim
 shim-signed
-#endif

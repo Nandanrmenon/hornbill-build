@@ -60,12 +60,6 @@ build () {
   # Symlink chosen package lists to where live-build will find them
   ln -s "package-lists.$PACKAGE_LISTS_SUFFIX" "config/package-lists"
 
-  # copy appcenter list & key
-  if [ "$INCLUDE_APPCENTER" = "yes" ]; then
-    cp "config/appcenter/appcenter.list.binary" "config/archives/appcenter.list.binary"
-    cp "config/appcenter/appcenter.key.binary" "config/archives/appcenter.key.binary"
-  fi
-
   echo -e "
 #------------------#
 # LIVE-BUILD CLEAN #
@@ -96,7 +90,7 @@ build () {
   YYYYMMDD="$(date +%Y%m%d)"
   OUTPUT_DIR="$BASE_DIR/builds/$BUILD_ARCH"
   mkdir -p "$OUTPUT_DIR"
-  FNAME="elementaryos-$VERSION-$CHANNEL.$YYYYMMDD$OUTPUT_SUFFIX"
+  FNAME="HornbillOS-$VERSION-$CHANNEL.$YYYYMMDD$OUTPUT_SUFFIX"
   mv "$BASE_DIR/tmp/$BUILD_ARCH/live-image-$BUILD_ARCH.hybrid.iso" "$OUTPUT_DIR/${FNAME}.iso"
 
   # cd into output to so {FNAME}.sha256.txt only
